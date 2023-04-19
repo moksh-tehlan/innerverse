@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "417827500870",
+    "project_id": "innerverse-f9540",
+    "storage_bucket": "innerverse-f9540.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:417827500870:android:b714ee42be96681627eb47",
+        "android_client_info": {
+          "package_name": "com.matter.innerverse"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "417827500870-kkn00klfdtmjeoe2v32hegdcu281fq5n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCf39CplQoMGt7MeCoA0gxkGXN5v_g0uyw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "417827500870-kkn00klfdtmjeoe2v32hegdcu281fq5n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
