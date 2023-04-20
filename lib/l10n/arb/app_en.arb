@@ -1,7 +1,11 @@
 {
     "@@locale": "en",
-    "counterAppBarTitle": "Counter",
-    "@counterAppBarTitle": {
-        "description": "Text shown in the AppBar of the Counter Page"
-    }
+    "appName": "Innerverse",
+    "loremText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nisi mauris, facilisis tristique ligula id, ornare luctus justo. In ac feugiat nulla. Facilisis tristique ligula id, ornare luctus justo. In ac feugiat nulla.",
+    "skip": "Skip",
+    "next": "Next",
+    "start": "Start",
+    "mindfulnessMeditation": "Mindfulness\nmeditation",
+    "mindfulness": "Mindfulness",
+    "meditation": "Meditation"
 }

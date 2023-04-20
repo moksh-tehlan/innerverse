@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:innerverse/l10n/l10n.dart';
 import 'package:innerverse/navigation/routes.dart';
 
@@ -11,7 +12,10 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       routerConfig: _appRouter.config(),
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      localizationsDelegates: const [
+      AppLocalizations.delegate,
+      GlobalMaterialLocalizations.delegate,
+    ],
       supportedLocales: AppLocalizations.supportedLocales,
     );
   }

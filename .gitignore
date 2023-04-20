@@ -12,6 +12,10 @@
 **.freezed.dart
 **.gr.dart
 
+# Temporary removal
+flutter_native_splash.yaml
+assets/images/logo.png
+
 
 # IntelliJ related
 *.iml

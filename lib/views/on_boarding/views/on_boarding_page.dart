@@ -1,9 +1,13 @@
 import 'package:auto_route/annotations.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:innerverse/l10n/l10n.dart';
 import 'package:innerverse/typography/text_style.dart';
 import 'package:innerverse/utils/app_colors.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:innerverse/utils/app_ui.dart';
+import 'package:innerverse/utils/assets_path.dart';
+import 'package:innerverse/utils/my_elevated_button.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 @RoutePage()
 class OnBoardingPage extends HookWidget {
@@ -13,7 +17,7 @@ class OnBoardingPage extends HookWidget {
   Widget build(BuildContext context) {
     final pageController = usePageController();
     final isLastPage = useState(false);
-    final image = useState('assets/images/image1.png');
+    final image = useState(onBoardingImg1);
 
     return SafeArea(
       child: Scaffold(
@@ -25,7 +29,7 @@ class OnBoardingPage extends HookWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Innerverse',
+                context.l10n.appName,
                 style: context.textStyle.bold.size30.withColor(
                   AppColors.white,
                 ),
@@ -39,6 +43,8 @@ class OnBoardingPage extends HookWidget {
                   ),
                 ),
                 child: InkWell(
+                  highlightColor: AppColors.deepCover,
+                  splashColor: AppColors.deepCover,
                   onTap: () => {
                     pageController.animateToPage(
                       3,
@@ -49,7 +55,7 @@ class OnBoardingPage extends HookWidget {
                   child: Visibility(
                     visible: !isLastPage.value,
                     child: Text(
-                      'Skip',
+                      context.l10n.skip,
                       style: context.textStyle.size15.withColor(
                         AppColors.white,
                       ),
@@ -63,96 +69,163 @@ class OnBoardingPage extends HookWidget {
         body: Column(
           children: [
             Expanded(
-              child: Container(
-                child: Image(
-                  image: AssetImage(image.value),
-                  // height: 200,
-                  // width: 200,
-                ),
+              child: Image(
+                image: AssetImage(image.value),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 15,bottom: 15,right: 15),
+              padding: const EdgeInsets.only(left: 15, bottom: 15, right: 15),
               child: Container(
-                height: 450,
+                height: 450.toResponsiveHeight(context),
                 decoration: BoxDecoration(
                   color: AppColors.rhino,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
-                      child: PageView(
+                    SizedBox(
+                      height: 15.toResponsiveHeight(context),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(15),
+                      child: SmoothPageIndicator(
+                        onDotClicked: (index) => pageController.animateToPage(
+                          index,
+                          duration: const Duration(milliseconds: 500),
+                          curve: Curves.easeOutSine,
+                        ),
                         controller: pageController,
-                        onPageChanged: (index) {
-                          isLastPage.value = index == 2;
-                          switch (index) {
-                            case 1:
-                              image.value = 'assets/images/image2.png';
-                              break;
-                            case 2:
-                              image.value = 'assets/images/image3.png';
-                              break;
-                            default:
-                              image.value = 'assets/images/image1.png';
-                              break;
-                          }
-                        },
-                        children: [
-                          Center(
-                            child: Text(
-                              'Page 1',
-                              style: context.textStyle.withColor(
-                                AppColors.white,
+                        count: 3,
+                        effect: const SlideEffect(
+                          activeDotColor: AppColors.orchidPink,
+                          dotHeight: 5,
+                          dotWidth: 30,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 15.toResponsiveHeight(context),
+                    ),
+                    Expanded(
+                      child: ScrollConfiguration(
+                        behavior: const ScrollBehavior().copyWith(
+                          overscroll: false,
+                        ),
+                        child: PageView(
+                          controller: pageController,
+                          onPageChanged: (index) {
+                            isLastPage.value = index == 2;
+                            switch (index) {
+                              case 1:
+                                image.value = onBoardingImg2;
+                                break;
+                              case 2:
+                                image.value = onBoardingImg3;
+                                break;
+                              default:
+                                image.value = onBoardingImg1;
+                                break;
+                            }
+                          },
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 15),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    context.l10n.mindfulnessMeditation,
+                                    style: context.textStyle.semiBold.size25
+                                        .withColor(
+                                      AppColors.white,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 15.toResponsiveHeight(
+                                      context,
+                                    ),
+                                  ),
+                                  Text(
+                                    context.l10n.loremText,
+                                    style: context.textStyle.size18
+                                        .withColor(AppColors.white),
+                                  ),
+                                ],
                               ),
                             ),
-                          ),
-                          Center(
-                            child: Text(
-                              'Page 2',
-                              style: context.textStyle.withColor(
-                                AppColors.white,
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 15),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    context.l10n.mindfulness,
+                                    style: context.textStyle.semiBold.size25
+                                        .withColor(
+                                      AppColors.white,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 15.toResponsiveHeight(context),
+                                  ),
+                                  Text(
+                                    context.l10n.loremText,
+                                    style: context.textStyle.size18
+                                        .withColor(AppColors.white),
+                                  ),
+                                ],
                               ),
                             ),
-                          ),
-                          Center(
-                            child: Text(
-                              'Page 3',
-                              style: context.textStyle.withColor(
-                                AppColors.white,
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 15),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    context.l10n.meditation,
+                                    style: context.textStyle.semiBold.size25
+                                        .withColor(
+                                      AppColors.white,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 15.toResponsiveHeight(context),
+                                  ),
+                                  Text(
+                                    context.l10n.loremText,
+                                    style: context.textStyle.size18
+                                        .withColor(AppColors.white),
+                                  ),
+                                ],
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(
                         15,
                       ),
-                      child: InkWell(
-                        onTap: () => {
-                          pageController.nextPage(
+                      child: SizedBox(
+                        width: double.infinity,
+                        height: 50.toResponsiveHeight(context),
+                        child: MyElevatedButton(
+                          onPressed: () => pageController.nextPage(
                             duration: const Duration(milliseconds: 500),
                             curve: Curves.easeOutSine,
-                          )
-                        },
-                        child: Container(
-                          width: double.infinity,
-                          height: 60,
-                          decoration: BoxDecoration(
-                            color: AppColors.orchidPink,
-                            borderRadius: BorderRadius.circular(
-                              30,
-                            ),
                           ),
-                          child: Center(
-                            child: Text(
-                              isLastPage.value ? 'Start' : 'Next',
-                              style:
-                                  context.textStyle.semiBold.size20.withColor(
-                                AppColors.black,
-                              ),
+                          borderRadius: BorderRadius.circular(30),
+                          child: Text(
+                            isLastPage.value
+                                ? context.l10n.start
+                                : context.l10n.next,
+                            style: context.textStyle.semiBold.size20.withColor(
+                              AppColors.black,
                             ),
                           ),
                         ),

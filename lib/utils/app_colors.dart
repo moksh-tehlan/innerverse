@@ -10,5 +10,6 @@ class AppColors extends MaterialColor{
   static const rhino = Color(0xFF31317A);
   static const blueMarguerite = Color(0xFF485096);
   static const periwinkleGray = Color(0xFFC3C0E1);
-  static const transparent = Color(0xffFFFFFF00);
+  static const apricot = Color(0xFFF3B386);
+  static const transparent = Colors.transparent;
 }
