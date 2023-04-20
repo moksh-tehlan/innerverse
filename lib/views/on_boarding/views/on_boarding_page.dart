@@ -7,6 +7,7 @@ import 'package:innerverse/utils/app_colors.dart';
 import 'package:innerverse/utils/app_ui.dart';
 import 'package:innerverse/utils/assets_path.dart';
 import 'package:innerverse/utils/my_elevated_button.dart';
+import 'package:innerverse/views/on_boarding/widgets/page_content.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 @RoutePage()
@@ -16,8 +17,8 @@ class OnBoardingPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final pageController = usePageController();
+    final imageController = usePageController();
     final isLastPage = useState(false);
-    final image = useState(onBoardingImg1);
 
     return SafeArea(
       child: Scaffold(
@@ -68,11 +69,32 @@ class OnBoardingPage extends HookWidget {
         ),
         body: Column(
           children: [
+            //<---------------------Image--------------->
             Expanded(
-              child: Image(
-                image: AssetImage(image.value),
+              child: PageView(
+                controller: imageController,
+                physics: const NeverScrollableScrollPhysics(),
+                children: const [
+                  Image(
+                    image: AssetImage(
+                      onBoardingImg1,
+                    ),
+                  ),
+                  Image(
+                    image: AssetImage(
+                      onBoardingImg2,
+                    ),
+                  ),
+                  Image(
+                    image: AssetImage(
+                      onBoardingImg3,
+                    ),
+                  ),
+                ],
               ),
             ),
+
+            //<-----------------------Page Content--------->
             Padding(
               padding: const EdgeInsets.only(left: 15, bottom: 15, right: 15),
               child: Container(
@@ -116,97 +138,31 @@ class OnBoardingPage extends HookWidget {
                           controller: pageController,
                           onPageChanged: (index) {
                             isLastPage.value = index == 2;
-                            switch (index) {
-                              case 1:
-                                image.value = onBoardingImg2;
-                                break;
-                              case 2:
-                                image.value = onBoardingImg3;
-                                break;
-                              default:
-                                image.value = onBoardingImg1;
-                                break;
-                            }
+                            imageController.animateToPage(
+                              index,
+                              duration: const Duration(milliseconds: 500),
+                              curve: Curves.easeOutSine,
+                            );
                           },
                           children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 15),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    context.l10n.mindfulnessMeditation,
-                                    style: context.textStyle.semiBold.size25
-                                        .withColor(
-                                      AppColors.white,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 15.toResponsiveHeight(
-                                      context,
-                                    ),
-                                  ),
-                                  Text(
-                                    context.l10n.loremText,
-                                    style: context.textStyle.size18
-                                        .withColor(AppColors.white),
-                                  ),
-                                ],
-                              ),
+                            PageContent(
+                              heading: context.l10n.mindfulnessMeditation,
+                              content: context.l10n.loremText,
                             ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 15),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    context.l10n.mindfulness,
-                                    style: context.textStyle.semiBold.size25
-                                        .withColor(
-                                      AppColors.white,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 15.toResponsiveHeight(context),
-                                  ),
-                                  Text(
-                                    context.l10n.loremText,
-                                    style: context.textStyle.size18
-                                        .withColor(AppColors.white),
-                                  ),
-                                ],
-                              ),
+                            PageContent(
+                              heading: context.l10n.mindfulness,
+                              content: context.l10n.loremText,
                             ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 15),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    context.l10n.meditation,
-                                    style: context.textStyle.semiBold.size25
-                                        .withColor(
-                                      AppColors.white,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 15.toResponsiveHeight(context),
-                                  ),
-                                  Text(
-                                    context.l10n.loremText,
-                                    style: context.textStyle.size18
-                                        .withColor(AppColors.white),
-                                  ),
-                                ],
-                              ),
+                            PageContent(
+                              heading: context.l10n.meditation,
+                              content: context.l10n.loremText,
                             ),
                           ],
                         ),
                       ),
                     ),
+
+                    //<-----------------Button--------------------->
                     Padding(
                       padding: const EdgeInsets.all(
                         15,

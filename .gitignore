@@ -9,12 +9,6 @@
 .buildlog/
 .history
 .svn/
-**.freezed.dart
-**.gr.dart
-
-# Temporary removal
-flutter_native_splash.yaml
-assets/images/logo.png
 
 
 # IntelliJ related
@@ -62,6 +56,9 @@ linked_*.ds
 unlinked.ds
 unlinked_spec.ds
 .fvm/
+**.freezed.dart
+**.gr.dart
+**.g.dart
 
 # Android related
 **/android/**/gradle-wrapper.jar
@@ -132,3 +129,7 @@ app.*.map.json
 !.idea/codeStyles/
 !.idea/dictionaries/
 !.idea/runConfigurations/
+
+# Temporary removal
+flutter_native_splash.yaml
+assets/images/logo.png
