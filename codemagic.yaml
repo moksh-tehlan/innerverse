@@ -11,7 +11,7 @@ workflows:
       - echo "Building APK for production..."
       - flutter build apk --flavor=development --target=lib/main_development.dart
     artifacts:
-      - build/app/outputs/flutter-apk/app-production-release.apk
+      - build/app/outputs/flutter-apk/app-development-release.apk
     publishing:
       email:
         recipients:
