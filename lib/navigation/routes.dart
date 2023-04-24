@@ -1,6 +1,4 @@
-import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:auto_route/src/route/auto_route_config.dart';
 import 'package:innerverse/navigation/routes.gr.dart';
 
 @AutoRouterConfig(replaceInRouteName: 'Page,Route')
