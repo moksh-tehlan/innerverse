@@ -7,5 +7,14 @@
     "start": "Start",
     "mindfulnessMeditation": "Mindfulness\nmeditation",
     "mindfulness": "Mindfulness",
-    "meditation": "Meditation"
+    "meditation": "Meditation",
+    "signUp":"Sign Up",
+    "createAccount":"Create an account to start\nyour meditation",
+    "nameError":"name must be 3 character long",
+    "emailError":"please use correct email-id",
+    "createPasswordError":"password must be 6 character long",
+    "confirmPasswordError":"password doesn't match",
+    "signUpWith":"or sign up with",
+    "accountExists":"Already have an account?",
+    "login":"Login"
 }
