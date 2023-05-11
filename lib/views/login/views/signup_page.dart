@@ -10,7 +10,7 @@ import 'package:innerverse/utils/app_colors.dart';
 import 'package:innerverse/utils/app_ui.dart';
 import 'package:innerverse/utils/assets_path.dart';
 import 'package:innerverse/utils/my_elevated_button.dart';
-import 'package:innerverse/views/login/authentication/authentication_bloc.dart';
+import 'package:innerverse/views/login/bloc/authentication_bloc.dart';
 
 @RoutePage()
 class SignupPage extends StatelessWidget {
@@ -29,7 +29,7 @@ class SignupPage extends StatelessWidget {
 }
 
 class _SignupPageView extends HookWidget {
-  const _SignupPageView({super.key});
+  const _SignupPageView();
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +50,7 @@ class _SignupPageView extends HookWidget {
     final emailFocusNode = useFocusNode();
     emailFocusNode.addListener(() {
       if (!emailFocusNode.hasFocus) {
-        emailError.value = !RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,}$')
+        emailError.value = !RegExp(r'^[\w-.]+@([\w-]+\.)+[\w-]{2,}$')
             .hasMatch(emailController.text);
       }
     });
@@ -75,7 +75,7 @@ class _SignupPageView extends HookWidget {
 
     bool isError() {
       nameError.value = nameController.text.length < 3;
-      emailError.value = !RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,}$')
+      emailError.value = !RegExp(r'^[\w-.]+@([\w-]+\.)+[\w-]{2,}$')
           .hasMatch(emailController.text);
       createPasswordError.value = createPasswordController.text.length < 6;
       confirmPasswordError.value =
@@ -89,21 +89,27 @@ class _SignupPageView extends HookWidget {
     return BlocListener<AuthenticationBloc, AuthenticationState>(
       listener: (context, state) {
         state.maybeWhen(
-            orElse: () {},
-            error: (error) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  backgroundColor: AppColors.periwinkleGray,
-                  duration: const Duration(milliseconds: 800),
-                  content: Text(
-                    error,
-                    style: context.textStyle.size14.semiBold
-                        .withColor(AppColors.black),
-                  ),
+          orElse: () {},
+          error: (error) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                backgroundColor: AppColors.periwinkleGray,
+                duration: const Duration(milliseconds: 800),
+                content: Text(
+                  error,
+                  style: context.textStyle.size14.semiBold
+                      .withColor(AppColors.black),
                 ),
-              );
-            },
-            signUpSuccessfull: (user){},);
+              ),
+            );
+          },
+          signUpSuccessfull: (user) {
+            AutoRouter.of(context).replaceNamed('/home');
+          },
+          signInSuccessfull: (user) {
+            AutoRouter.of(context).replaceNamed('/home');
+          },
+        );
       },
       child: SafeArea(
         child: Scaffold(
@@ -209,7 +215,7 @@ class _SignupPageView extends HookWidget {
                         focusNode: emailFocusNode,
                         onSubmitted: (value) {
                           emailError.value =
-                              !RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,}$')
+                              !RegExp(r'^[\w-.]+@([\w-]+\.)+[\w-]{2,}$')
                                   .hasMatch(value);
                         },
                         controller: emailController,
@@ -427,17 +433,28 @@ class _SignupPageView extends HookWidget {
                     ),
                     Container(
                       width: double.infinity,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 20.toResponsiveWidth(context),
-                      ),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
                         color: AppColors.rhino,
                       ),
-                      child: Center(
-                        child: Image.asset(
-                          icnGoogle,
-                          height: 50.toResponsiveHeight(context),
+                      child: ElevatedButton(
+                        onPressed: () => context.read<AuthenticationBloc>().add(
+                              const AuthenticationEvent.signInWithGoogle(),
+                            ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.transparent,
+                          shadowColor: AppColors.transparent,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                              30,
+                            ),
+                          ),
+                        ),
+                        child: Center(
+                          child: Image.asset(
+                            icnGoogle,
+                            height: 50.toResponsiveHeight(context),
+                          ),
                         ),
                       ),
                     ),
