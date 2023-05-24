@@ -8,7 +8,7 @@ workflows:
       - flutter packages get
       - echo "Running build runner..."
       - flutter pub run build_runner build --delete-conflicting-outputs
-      - echo "Building APK for production..."
+      - echo "Building APK for development..."
       - flutter build apk --flavor=development --target=lib/main_development.dart
     artifacts:
       - build/app/outputs/flutter-apk/app-development-release.apk

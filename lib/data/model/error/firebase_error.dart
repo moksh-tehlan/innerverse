@@ -1,6 +1,8 @@
 class FirebaseError {
+
   FirebaseError({required String code}) : _code = code;
   final String _code;
+
   String _message() {
     switch (_code) {
       case 'weak-password':

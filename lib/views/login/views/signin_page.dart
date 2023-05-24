@@ -79,7 +79,7 @@ class SigninPageView extends HookWidget {
           },
           signInSuccessfull: (user) {
             AutoRouter.of(context).replaceAll(
-              <PageRouteInfo>[const HomeRoute()],
+              <PageRouteInfo>[const TabRoute()],
             );
           },
         );

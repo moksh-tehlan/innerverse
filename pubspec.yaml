@@ -10,6 +10,7 @@ dependencies:
   auto_route: ^6.3.0
   auto_route_generator: ^6.2.0
   bloc: ^8.1.1
+  cloud_firestore: ^4.7.1
   dartz: ^0.10.1
   firebase_auth: ^4.4.2
   firebase_core: ^2.10.0
