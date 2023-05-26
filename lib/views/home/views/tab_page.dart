@@ -4,6 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:innerverse/typography/text_style.dart';
 import 'package:innerverse/utils/app_colors.dart';
 import 'package:innerverse/utils/app_ui.dart';
+import 'package:innerverse/views/chat/views/chat_page.dart';
 import 'package:innerverse/views/home/views/home_page.dart';
 
 @RoutePage()
@@ -22,7 +23,7 @@ class TabBarPageView extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final tabIndex = useState(0);
-    const screens = [HomePage(), HomePage(), HomePage(), HomePage()];
+    const screens = [HomePage(), ChatPage(), HomePage(), HomePage()];
 
     debugPrint('tab Index: ${tabIndex.value}');
     return SafeArea(

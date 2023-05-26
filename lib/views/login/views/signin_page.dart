@@ -16,7 +16,7 @@ import 'package:innerverse/views/login/bloc/authentication_bloc.dart';
 
 @RoutePage()
 class SigninPage extends StatelessWidget {
-  const SigninPage({Key? key}) : super(key: key);
+  const SigninPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +35,8 @@ class SigninPageView extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final emailController = useTextEditingController();
-    final passwordController = useTextEditingController();
+    final emailController = useTextEditingController(text: 'tehlanmoksh29@gmail.com');
+    final passwordController = useTextEditingController(text: 'Moxtehlan@2');
     final emailError = useState(false);
     final passwordError = useState(false);
     final emailFocusNode = useFocusNode();

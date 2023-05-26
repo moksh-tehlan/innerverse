@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:innerverse/data/repository/firebase_authentication_repository.dart';
+import 'package:innerverse/data/repository/user_repository.dart';
 import 'package:innerverse/di/dependency_injection.dart';
 import 'package:innerverse/l10n/l10n.dart';
 import 'package:innerverse/typography/text_style.dart';
@@ -388,8 +389,11 @@ class _SignupPageView extends HookWidget {
                         if (isError()) {
                           context.read<AuthenticationBloc>().add(
                                 AuthenticationEvent.signup(
+                                  userRepository: getIt<UserRepository>(),
                                   emailAddress: emailController.text,
                                   password: confirmPasswordController.text,
+                                  name: nameController.text,
+                                  uid: firebaseAuth.currentUser?.uid ?? '',
                                 ),
                               );
                         }
