@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class Collections{
@@ -5,7 +7,9 @@ class Collections{
   // base url
   static const String gptUrl = 'https://api.openai.com/v1/chat/completions';
 
-  static const String key = String.fromEnvironment('OPENAI_API_KEY');
+  static const String key = 'QmVhcmVyIHNrLUVvWVEzSXZMZzdBTDEyTkhwVTJTVDNCbGJrRkpyRXRxWXZvbjRpVHFQM0dCSXdkTQ==';
+
+  static final  String openApiKey = utf8.decode(base64.decode(key));
 
   // receiveTimeout
   static const Duration receiveTimeout = Duration(milliseconds: 250000);

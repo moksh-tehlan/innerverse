@@ -11,7 +11,7 @@ class DioClient {
       ..options.connectTimeout = Collections.connectionTimeout
       ..options.receiveTimeout = Collections.receiveTimeout
       ..options.responseType = ResponseType.json
-      ..options.headers['Authorization'] = Collections.key
+      ..options.headers['Authorization'] = Collections.openApiKey
       ..options.headers['Content-Type'] = 'application/json'
       ..interceptors.add(
         PrettyDioLogger(

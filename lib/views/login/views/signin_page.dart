@@ -35,8 +35,8 @@ class SigninPageView extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final emailController = useTextEditingController(text: 'tehlanmoksh29@gmail.com');
-    final passwordController = useTextEditingController(text: 'Moxtehlan@2');
+    final emailController = useTextEditingController(text: 'user@mail.com');
+    final passwordController = useTextEditingController(text: 'test123');
     final emailError = useState(false);
     final passwordError = useState(false);
     final emailFocusNode = useFocusNode();
