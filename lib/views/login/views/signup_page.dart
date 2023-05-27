@@ -105,10 +105,10 @@ class _SignupPageView extends HookWidget {
             );
           },
           signUpSuccessfull: (user) {
-            AutoRouter.of(context).replaceNamed('/tab');
+            AutoRouter.of(context).replaceNamed('/');
           },
           signInSuccessfull: (user) {
-            AutoRouter.of(context).replaceNamed('/tab');
+            AutoRouter.of(context).replaceNamed('/');
           },
         );
       },

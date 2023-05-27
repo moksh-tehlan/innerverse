@@ -6,6 +6,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:innerverse/data/model/user_model.dart';
 import 'package:innerverse/data/repository/firebase_authentication_repository.dart';
 import 'package:innerverse/data/repository/user_repository.dart';
+import 'package:innerverse/di/dependency_injection.dart';
 
 part 'authentication_state.dart';
 part 'authentication_event.dart';
@@ -41,12 +42,10 @@ class AuthenticationBloc
       ),
     );
     authResponse.fold(
-      (user) => {
-        userResponse.fold(
-          (userAdded) => {emit(_SignUpSuccessfull(user: user))},
+      (user) => userResponse.fold(
+          (userAdded) => emit(_SignUpSuccessfull(user: user)),
           (error) => emit(_Error(error: error.message)),
-        )
-      },
+        ),
       (error) => emit(_Error(error: error.message)),
     );
   }

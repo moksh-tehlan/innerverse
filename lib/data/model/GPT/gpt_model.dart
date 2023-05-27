@@ -1,17 +1,17 @@
 import 'dart:convert';
 
 GptModel gptModelFromJson(String str) =>
-    GptModel.fromJson(jsonDecode(str) as Map<String, dynamic>);
+    GptModel.fromJson(jsonDecode(str));
 
 class GptModel {
   GptModel({
     this.choices,
   });
 
-  factory GptModel.fromJson(Map<String, dynamic> json) => GptModel(
+  factory GptModel.fromJson(dynamic json) => GptModel(
         choices: List<Choice>.from(
           (json['choices'] as List<dynamic>)
-              .map((x) => Choice.fromJson(x as Map<String, dynamic>)),
+              .map(Choice.fromJson),
         ),
       );
   final List<Choice>? choices;
@@ -22,7 +22,7 @@ class Choice {
     this.message,
   });
 
-  factory Choice.fromJson(Map<String, dynamic> json) => Choice(
+  factory Choice.fromJson(dynamic json) => Choice(
         message: Message.fromJson(json['message'] as Map<String, dynamic>),
       );
   final Message? message;

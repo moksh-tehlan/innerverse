@@ -7,7 +7,9 @@ import 'package:innerverse/utils/app_colors.dart';
 import 'package:innerverse/utils/app_ui.dart';
 import 'package:innerverse/utils/assets_path.dart';
 import 'package:innerverse/utils/my_elevated_button.dart';
+import 'package:innerverse/utils/shared_pref.dart';
 import 'package:innerverse/views/on_boarding/widgets/page_content.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 @RoutePage()
@@ -171,14 +173,22 @@ class OnBoardingPage extends HookWidget {
                         width: double.infinity,
                         height: 50.toResponsiveHeight(context),
                         child: MyElevatedButton(
-                          onPressed: () {
-                            isLastPage.value
-                                ? AutoRouter.of(context).replaceNamed('/signUp')
-                                : pageController.nextPage(
+                          onPressed: isLastPage.value
+                              ? () async {
+                                  final sharedPref =
+                                      await SharedPreferences.getInstance();
+                                  await sharedPref.setBool(
+                                    'onBoardingVisited',
+                                    true,
+                                  );
+                                  AutoRouter.of(context).replaceNamed('/signUp');
+                                }
+                              : () {
+                                  pageController.nextPage(
                                     duration: const Duration(milliseconds: 500),
                                     curve: Curves.easeOutSine,
                                   );
-                          },
+                                },
                           borderRadius: BorderRadius.circular(30),
                           child: Text(
                             isLastPage.value

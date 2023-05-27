@@ -4,6 +4,7 @@ class AppColors extends MaterialColor{
   const AppColors(super.primary, super.swatch);
 
   static const white = Color(0xFFFFFFFF);
+  static const paleWhite = Color(0xFFB8B8B8);
   static const black = Color(0xFF000000);
   static const deepCover = Color(0xFF0E133C);
   static const orchidPink = Color(0xFFEB7FDC);

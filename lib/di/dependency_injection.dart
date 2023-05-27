@@ -3,7 +3,9 @@ import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
+import 'package:innerverse/data/model/GPT/gpt_message_model.dart';
 import 'package:innerverse/data/network/dio_client.dart';
 import 'package:innerverse/data/network/firebase_authentication.dart';
 import 'package:innerverse/data/network/gpt_call.dart';
@@ -12,16 +14,20 @@ import 'package:innerverse/data/repository/firebase_authentication_repository.da
 import 'package:innerverse/data/repository/gpt_repository.dart';
 import 'package:innerverse/data/repository/user_repository.dart';
 import 'package:innerverse/di/firebase_options.dart';
+import 'package:innerverse/utils/shared_pref.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final getIt = GetIt.instance;
 final firebaseAuth = FirebaseAuth.instance;
 final firestoreInstance = FirebaseFirestore.instance;
+final gptMessageModelList = <GptMessageModel>[GptMessageModel(role: 'system',content: 'you should provide companionship and emotional support to the user you should generates brief and straightforward responses, engaging in friendly conversations and offering comfort to alleviate loneliness. and the name of the user is ${getIt<FirebaseAuthenticationRepository>().getUser()?.displayName}')];
 
 Future<void> setupDependencyInjection() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await dotenv.load();
 
   getIt
     ..registerSingleton(FirebaseAuthentication(firebaseAuth: firebaseAuth))

@@ -9,7 +9,7 @@ class GptRepository {
   final GptCall _gptCall;
 
   Future<Either<GptModel, GenericError>> getGptResponse(
-      {required List<GptMessageModel> messageModel}) {
-    return _gptCall.getResponse(gptMessageModel: messageModel);
+      {required List<GptMessageModel> messageModelList,}) {
+    return _gptCall.getResponse(gptMessageModelList: messageModelList);
   }
 }
