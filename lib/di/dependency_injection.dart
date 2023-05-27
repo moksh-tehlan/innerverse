@@ -14,8 +14,6 @@ import 'package:innerverse/data/repository/firebase_authentication_repository.da
 import 'package:innerverse/data/repository/gpt_repository.dart';
 import 'package:innerverse/data/repository/user_repository.dart';
 import 'package:innerverse/di/firebase_options.dart';
-import 'package:innerverse/utils/shared_pref.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 final getIt = GetIt.instance;
 final firebaseAuth = FirebaseAuth.instance;
@@ -27,7 +25,7 @@ Future<void> setupDependencyInjection() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  await dotenv.load();
+  // await dotenv.load();
 
   getIt
     ..registerSingleton(FirebaseAuthentication(firebaseAuth: firebaseAuth))
