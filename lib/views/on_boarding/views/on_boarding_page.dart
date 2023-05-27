@@ -164,7 +164,6 @@ class OnBoardingPage extends HookWidget {
                       ),
                     ),
 
-                    //<-----------------Button--------------------->
                     Padding(
                       padding: const EdgeInsets.all(
                         15,
