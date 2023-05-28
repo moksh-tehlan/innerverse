@@ -184,7 +184,7 @@ class HomePageView extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               const Icon(
-                                Icons.repeat_rounded,
+                                Icons.cached_rounded,
                                 color: AppColors.white,
                               ),
                               const SizedBox(
