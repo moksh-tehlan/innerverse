@@ -9,4 +9,10 @@ class UserRepository{
   Future<Either<void,GenericError>> addUser(UserModel userModel)async {
     return _userCalls.addUser(userModel);
   }
+  Future<Either<UserModel,GenericError>> getUser()async{
+    return _userCalls.getUser();
+  }
+  Future<String> getUserName(){
+    return _userCalls.getUserName();
+  }
 }

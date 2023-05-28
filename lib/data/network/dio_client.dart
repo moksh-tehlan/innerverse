@@ -11,8 +11,6 @@ class DioClient {
       ..options.connectTimeout = Collections.connectionTimeout
       ..options.receiveTimeout = Collections.receiveTimeout
       ..options.responseType = ResponseType.json
-      ..options.headers['Authorization'] = Collections.openApiKey
-      ..options.headers['Content-Type'] = 'application/json'
       ..interceptors.add(
         PrettyDioLogger(
           requestHeader: true,
@@ -43,12 +41,27 @@ class DioClient {
 
   Future<Response<dynamic>> post(
     String url, {
-    required Map<String,dynamic> data,
+    required Map<String, dynamic> data,
+    required Options options,
   }) async {
-      final response = await _dio.post<dynamic>(
-        url,
-        data: data,
-      );
-      return response;
+    final response = await _dio.post<dynamic>(
+      url,
+      data: data,
+      options: options,
+    );
+    return response;
+  }
+
+  Future<Response<dynamic>> get(
+    String url, {
+    required Map<String, dynamic> queryParameters,
+    required Options options,
+  }) async {
+    final response = await _dio.get(
+      url,
+      queryParameters: queryParameters,
+      options: options,
+    );
+    return response;
   }
 }

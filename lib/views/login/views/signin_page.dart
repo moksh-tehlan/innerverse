@@ -53,6 +53,8 @@ class SigninPageView extends HookWidget {
       }
     });
 
+    final isPasswordVisible = useState(false);
+
     bool isError() {
       emailError.value = !RegExp(r'^[\w-.]+@([\w-]+\.)+[\w-]{2,}$')
           .hasMatch(emailController.text);
@@ -156,7 +158,7 @@ class SigninPageView extends HookWidget {
                         decoration: InputDecoration(
                           hintText: 'Email-Id',
                           hintStyle: context.textStyle.size18.withColor(
-                            AppColors.white,
+                            AppColors.paleWhite,
                           ),
                           border: InputBorder.none,
                         ),
@@ -202,6 +204,7 @@ class SigninPageView extends HookWidget {
                         color: AppColors.rhino,
                       ),
                       child: TextField(
+                        obscureText: !isPasswordVisible.value,
                         onChanged: (value) {
                           passwordError.value = false;
                         },
@@ -216,9 +219,24 @@ class SigninPageView extends HookWidget {
                         decoration: InputDecoration(
                           hintText: 'Password',
                           hintStyle: context.textStyle.size18.withColor(
-                            AppColors.white,
+                            AppColors.paleWhite,
                           ),
                           border: InputBorder.none,
+                          suffixIcon: InkWell(
+                            onTap: () => isPasswordVisible.value =
+                            !isPasswordVisible.value,
+                            child: isPasswordVisible.value
+                                ? const Icon(
+                              Icons.visibility_off,
+                              color: AppColors.paleWhite,
+                              size: 20,
+                            )
+                                : const Icon(
+                              Icons.visibility,
+                              color: AppColors.paleWhite,
+                              size: 20,
+                            ),
+                          ),
                         ),
                         cursorColor: AppColors.white,
                       ),

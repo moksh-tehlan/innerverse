@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 import 'package:innerverse/data/model/GPT/gpt_message_model.dart';
 import 'package:innerverse/data/model/GPT/gpt_model.dart';
 import 'package:innerverse/data/model/error/generic_error.dart';
@@ -20,6 +21,12 @@ class GptCall {
           'messages': gptMessageModelToList(gptMessageModelList),
           'max_tokens': 70
         },
+        options: Options(
+          headers:{
+            'Authorization':Collections.openApiKey,
+            'Content-type':'application/json',
+          },
+        ),
       );
       return left(GptModel.fromJson(response.data));
     } catch (e) {

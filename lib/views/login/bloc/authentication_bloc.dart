@@ -7,6 +7,7 @@ import 'package:innerverse/data/model/user_model.dart';
 import 'package:innerverse/data/repository/firebase_authentication_repository.dart';
 import 'package:innerverse/data/repository/user_repository.dart';
 import 'package:innerverse/di/dependency_injection.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 part 'authentication_state.dart';
 part 'authentication_event.dart';
@@ -38,14 +39,16 @@ class AuthenticationBloc
       UserModel(
         name: event.name,
         email: event.emailAddress,
-        uid: event.uid,
+        uid: firebaseAuth.currentUser?.uid ?? '',
       ),
     );
+    final sharedPref = await SharedPreferences.getInstance();
+    await sharedPref.setString('name', event.name);
     authResponse.fold(
       (user) => userResponse.fold(
-          (userAdded) => emit(_SignUpSuccessfull(user: user)),
-          (error) => emit(_Error(error: error.message)),
-        ),
+        (userAdded) => emit(_SignUpSuccessfull(user: user)),
+        (error) => emit(_Error(error: error.message)),
+      ),
       (error) => emit(_Error(error: error.message)),
     );
   }
@@ -59,6 +62,9 @@ class AuthenticationBloc
       email: event.email,
       password: event.password,
     );
+    final sharedPref = await SharedPreferences.getInstance();
+    final userName = await getIt<UserRepository>().getUserName();
+    await sharedPref.setString('name', userName);
     emit(
       response.fold(
         (user) => _SignInSuccessfull(user: user),
@@ -71,7 +77,20 @@ class AuthenticationBloc
     _SignInWithGoogle event,
     Emitter<AuthenticationState> emit,
   ) async {
+    final userRepository = getIt<UserRepository>();
     final response = await _firebaseAuthenticationRepository.signInWithGoogle();
+    await userRepository.addUser(
+      UserModel(
+        name: firebaseAuth.currentUser?.displayName ?? '',
+        email: firebaseAuth.currentUser?.email ?? '',
+        uid: firebaseAuth.currentUser?.uid ?? '',
+      ),
+    );
+    final sharedPref = await SharedPreferences.getInstance();
+    await sharedPref.setString(
+      'name',
+      firebaseAuth.currentUser?.displayName ?? '',
+    );
     emit(
       response.fold(
         (user) => _SignInSuccessfull(user: user),

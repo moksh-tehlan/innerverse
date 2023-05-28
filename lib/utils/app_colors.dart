@@ -12,5 +12,7 @@ class AppColors extends MaterialColor{
   static const blueMarguerite = Color(0xFF485096);
   static const periwinkleGray = Color(0xFFC3C0E1);
   static const apricot = Color(0xFFF3B386);
+  static const homeGradiantBlackA = Color(0xDD050505);
+  static const homeGradiantBlackB = Color(0xDFFFFFF);
   static const transparent = Colors.transparent;
 }

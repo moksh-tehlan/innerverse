@@ -7,7 +7,6 @@ import 'package:innerverse/utils/app_colors.dart';
 import 'package:innerverse/utils/app_ui.dart';
 import 'package:innerverse/utils/assets_path.dart';
 import 'package:innerverse/utils/my_elevated_button.dart';
-import 'package:innerverse/utils/shared_pref.dart';
 import 'package:innerverse/views/on_boarding/widgets/page_content.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';

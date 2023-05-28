@@ -73,6 +73,7 @@ class _SignupPageView extends HookWidget {
             createPasswordController.text != confirmPasswordController.text;
       }
     });
+    final isPasswordVisible = useState(false);
 
     bool isError() {
       nameError.value = nameController.text.length < 3;
@@ -164,7 +165,7 @@ class _SignupPageView extends HookWidget {
                         decoration: InputDecoration(
                           hintText: 'Name',
                           hintStyle: context.textStyle.size18.withColor(
-                            AppColors.white,
+                            AppColors.paleWhite,
                           ),
                           border: InputBorder.none,
                         ),
@@ -226,7 +227,7 @@ class _SignupPageView extends HookWidget {
                         decoration: InputDecoration(
                           hintText: 'Email-Id',
                           hintStyle: context.textStyle.size18.withColor(
-                            AppColors.white,
+                            AppColors.paleWhite,
                           ),
                           border: InputBorder.none,
                         ),
@@ -272,6 +273,7 @@ class _SignupPageView extends HookWidget {
                         color: AppColors.rhino,
                       ),
                       child: TextField(
+                        obscureText: !isPasswordVisible.value,
                         onChanged: (value) {
                           createPasswordError.value = false;
                         },
@@ -286,9 +288,24 @@ class _SignupPageView extends HookWidget {
                         decoration: InputDecoration(
                           hintText: 'Create Password',
                           hintStyle: context.textStyle.size18.withColor(
-                            AppColors.white,
+                            AppColors.paleWhite,
                           ),
                           border: InputBorder.none,
+                          suffixIcon: InkWell(
+                            onTap: () => isPasswordVisible.value =
+                                !isPasswordVisible.value,
+                            child: isPasswordVisible.value
+                                ? const Icon(
+                                    Icons.visibility_off,
+                                    color: AppColors.paleWhite,
+                                    size: 20,
+                                  )
+                                : const Icon(
+                                    Icons.visibility,
+                                    color: AppColors.paleWhite,
+                                    size: 20,
+                                  ),
+                          ),
                         ),
                         cursorColor: AppColors.white,
                       ),
@@ -332,6 +349,7 @@ class _SignupPageView extends HookWidget {
                         color: AppColors.rhino,
                       ),
                       child: TextField(
+                        obscureText: true,
                         onChanged: (value) {
                           confirmPasswordError.value = false;
                         },
@@ -347,7 +365,7 @@ class _SignupPageView extends HookWidget {
                         decoration: InputDecoration(
                           hintText: 'Confirm Password',
                           hintStyle: context.textStyle.size18.withColor(
-                            AppColors.white,
+                            AppColors.paleWhite,
                           ),
                           border: InputBorder.none,
                         ),
@@ -393,7 +411,6 @@ class _SignupPageView extends HookWidget {
                                   emailAddress: emailController.text,
                                   password: confirmPasswordController.text,
                                   name: nameController.text,
-                                  uid: firebaseAuth.currentUser?.uid ?? '',
                                 ),
                               );
                         }

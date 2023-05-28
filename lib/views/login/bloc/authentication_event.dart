@@ -7,7 +7,6 @@ class AuthenticationEvent with _$AuthenticationEvent {
     required String emailAddress,
     required String password,
     required String name,
-    required String uid,
   }) = _SignUp;
   const factory AuthenticationEvent.signin({
     required String email,
