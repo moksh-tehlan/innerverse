@@ -6,7 +6,6 @@ import 'package:innerverse/utils/app_colors.dart';
 import 'package:innerverse/utils/app_ui.dart';
 import 'package:innerverse/views/chat/views/chat_page.dart';
 import 'package:innerverse/views/home/views/home_page.dart';
-import 'package:innerverse/views/posts/views/post_page.dart';
 import 'package:innerverse/views/profile/views/profile_page.dart';
 
 @RoutePage()
@@ -25,9 +24,8 @@ class TabBarPageView extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final tabIndex = useState(0);
-    const screens = [HomePage(), ChatPage(), PostPage(), ProfilePage()];
+    const screens = [HomePage(), ChatPage(), ProfilePage()];
 
-    debugPrint('tab Index: ${tabIndex.value}');
     return Scaffold(
       backgroundColor: AppColors.deepCover,
       body: screens[tabIndex.value],
@@ -102,6 +100,32 @@ class TabBarPageView extends HookWidget {
                 ),
               ),
             ),
+            // InkWell(
+            //   highlightColor: AppColors.white,
+            //   splashColor: AppColors.white,
+            //   onTap: () => tabIndex.value = 2,
+            //   child: SizedBox(
+            //     child: Column(
+            //       mainAxisAlignment: MainAxisAlignment.center,
+            //       children: [
+            //         Icon(
+            //           Icons.post_add_rounded,
+            //           color: tabIndex.value == 2
+            //               ? AppColors.orchidPink
+            //               : AppColors.white,
+            //         ),
+            //         Text(
+            //           'Posts',
+            //           style: context.textStyle.bold.size12.withColor(
+            //             tabIndex.value == 2
+            //                 ? AppColors.orchidPink
+            //                 : AppColors.white,
+            //           ),
+            //         ),
+            //       ],
+            //     ),
+            //   ),
+            // ),
             InkWell(
               highlightColor: AppColors.white,
               splashColor: AppColors.white,
@@ -111,41 +135,15 @@ class TabBarPageView extends HookWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(
-                      Icons.post_add_rounded,
-                      color: tabIndex.value == 2
-                          ? AppColors.orchidPink
-                          : AppColors.white,
-                    ),
-                    Text(
-                      'Posts',
-                      style: context.textStyle.bold.size12.withColor(
-                        tabIndex.value == 2
-                            ? AppColors.orchidPink
-                            : AppColors.white,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            InkWell(
-              highlightColor: AppColors.white,
-              splashColor: AppColors.white,
-              onTap: () => tabIndex.value = 3,
-              child: SizedBox(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
                       Icons.person_2_rounded,
-                      color: tabIndex.value == 3
+                      color: tabIndex.value == 2
                           ? AppColors.orchidPink
                           : AppColors.white,
                     ),
                     Text(
                       'Profile',
                       style: context.textStyle.bold.size12.withColor(
-                        tabIndex.value == 3
+                        tabIndex.value == 2
                             ? AppColors.orchidPink
                             : AppColors.white,
                       ),

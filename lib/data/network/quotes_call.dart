@@ -20,9 +20,7 @@ class QuotesCall {
           },
         ),
       );
-      print('response: ${response.data}');
       final quoteModel = quotesModelFromJson(response.data);
-      print('quoteModel: $quoteModel');
       return left(quoteModel);
     }catch(e){
       return right(GenericError(message: e.toString()));

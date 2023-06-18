@@ -31,7 +31,6 @@ Future<void> setupDependencyInjection() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  // await dotenv.load();
 
   getIt
     ..registerSingleton(FirebaseAuthentication(firebaseAuth: firebaseAuth))

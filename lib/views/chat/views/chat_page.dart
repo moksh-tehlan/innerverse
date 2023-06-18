@@ -2,7 +2,6 @@ import 'package:chat_bubbles/chat_bubbles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:innerverse/data/model/GPT/gpt_message_model.dart';
 import 'package:innerverse/data/repository/gpt_repository.dart';
 import 'package:innerverse/di/dependency_injection.dart';
 import 'package:innerverse/typography/text_style.dart';

@@ -132,6 +132,7 @@ class ProfilePageView extends StatelessWidget {
                       await firebaseAuth.signOut();
                       final sharedPref = await SharedPreferences.getInstance();
                       await sharedPref.clear();
+                      gptMessageModelList.clear();
                       AutoRouter.of(context).replaceAll(
                         <PageRouteInfo>[const SignupRoute()],
                       );

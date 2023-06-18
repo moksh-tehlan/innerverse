@@ -212,22 +212,3 @@ class HomePageView extends StatelessWidget {
     );
   }
 }
-
-class Something extends StatelessWidget {
-  const Something({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const SingleChildScrollView(
-      child: Column(
-        children: [
-          Text('something'),
-          Expanded(
-            child: SizedBox(),
-          ),
-          Text('something'),
-        ],
-      ),
-    );
-  }
-}
